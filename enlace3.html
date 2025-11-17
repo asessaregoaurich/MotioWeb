@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotioMetrics - Motio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="icon" href="imagenes/logo.png" type="image/x-icon">
+    <style>
+        /* Product detail page styles */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background: #ffffff; 
+        }
+
+        .navbar {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(14px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 50px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar a.back-btn {
+            color: #0144ae;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .navbar a.back-btn:hover {
+            transform: translateX(-4px);
+            color: #063781;
+        }
+
+        .hero {
+            padding: 80px 50px;
+            text-align: center;
+            background: linear-gradient(135deg, #eef6f8 0%, #f5fafc 100%);
+            border-bottom: 1px solid rgba(6, 55, 129, 0.1);
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #063781;
+            margin: 0 0 24px 0;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #2b2b2b;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 50px;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #063781;
+            margin-bottom: 48px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #0144ae;
+            margin: 16px auto 0;
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: #f9fafb;
+            border: 1px solid rgba(6, 55, 129, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #0144ae;
+            box-shadow: 0 12px 32px rgba(1, 68, 174, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .feature-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #063781;
+            margin: 0 0 16px 0;
+        }
+
+        .feature-card p {
+            color: #2b2b2b;
+            line-height: 1.8;
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0 0 0;
+        }
+
+        .feature-card ul li {
+            color: #2b2b2b;
+            line-height: 1.8;
+            padding: 8px 0;
+            position: relative;
+            padding-left: 24px;
+            font-size: 0.95rem;
+        }
+
+        .feature-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #0144ae;
+            font-weight: 900;
+        }
+
+        .workflow-section {
+            background: linear-gradient(135deg, #eef6f8 0%, #f5fafc 100%);
+            border-radius: 16px;
+            padding: 60px;
+            margin: 80px 0;
+            border: 1px solid rgba(6, 55, 129, 0.1);
+        }
+
+        .workflow-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #063781;
+            margin: 0 0 40px 0;
+            text-align: center;
+        }
+
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .workflow-step {
+            text-align: center;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: #0144ae;
+            color: #ffffff;
+            border-radius: 50%;
+            line-height: 60px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .workflow-step h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: #063781;
+            margin: 0 0 12px 0;
+        }
+
+        .workflow-step p {
+            color: #2b2b2b;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .tech-stack {
+            background: linear-gradient(135deg, #063781 0%, #0144ae 100%);
+            color: #ffffff;
+            border-radius: 16px;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .tech-stack h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            margin: 0 0 40px 0;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .tech-item h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 900;
+            margin: 0 0 16px 0;
+        }
+
+        .tech-item p {
+            margin: 0;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .footer-link {
+            text-align: center;
+            padding: 40px 50px;
+            background: #f5f7fa;
+            border-top: 1px solid rgba(6, 55, 129, 0.1);
+        }
+
+        .footer-link a {
+            font-family: 'Montserrat', sans-serif;
+            display: inline-block;
+            background: #0144ae;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link a:hover {
+            background: #063781;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(6, 55, 129, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 16px 24px;
+            }
+
+            .hero {
+                padding: 60px 24px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 60px 24px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .feature-card {
+                padding: 32px 24px;
+            }
+
+            .workflow-section {
+                padding: 40px 24px;
+            }
+
+            .tech-stack {
+                padding: 40px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="back-btn">← Volver a inicio</a>
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.2rem; color: #063781;">MotioMetrics</span>
+        <div style="width: 100px;"></div>
+    </nav>
+
+    <section class="hero">
+        <h1>MotioMetrics</h1>
+        <p>MotioMetrics es la plataforma web donde el profesional puede cargar mediciones, visualizar resultados del temblor y generar informes clínicos en PDF con análisis detallado.</p>
+    </section>
+
+    <div class="container">
+        <h2 class="section-title">Funciones principales</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Carga de datos</h3>
+                <ul>
+                    <li>Importa archivos .csv de MotioSensor</li>
+                    <li>Validación automática de datos</li>
+                    <li>Procesamiento inmediato</li>
+                    <li>Almacenamiento seguro en el navegador</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>Visualización avanzada</h3>
+                <ul>
+                    <li>Detección de episodios de temblor</li>
+                    <li>Análisis espectral (FFT)</li>
+                    <li>Evolución temporal del RMS</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>Informes clínicos</h3>
+                <ul>
+                    <li>Generación automática en PDF</li>
+                    <li>Gráficos profesionales</li>
+                    <li>Datos cuantitativos detallados</li>
+                    <li>Historial del paciente completo</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="workflow-section">
+            <h2>Flujo de trabajo</h2>
+            <div class="workflow-steps">
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <h4>Cargar datos</h4>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <h4>Procesar</h4>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <h4>Visualizar</h4>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">4</div>
+                    <h4>Reportar</h4>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Análisis incluidos</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Detección de temblor</h3>
+                <p>Identifica y clasifica automáticamente los episodios de temblor parkinsoniano, diferenciando entre movimiento voluntario y patológico.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Análisis espectral FFT</h3>
+                <p>Realiza transformadas rápidas de Fourier para identificar componentes de frecuencia dominante en el temblor.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Evolución temporal</h3>
+                <p>Visualiza cambios en amplitud RMS a lo largo del tiempo, permitiendo seguimiento de la progresión y respuesta al tratamiento.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-link">
+        <a href="index.html#productos">Ver otros productos</a>
+    </div>
+</body>
+</html>
