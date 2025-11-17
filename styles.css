@@ -80,6 +80,50 @@ h1, h2, h3 {
     }
 }
 
+/* Animación del hamburguesa cuando está activo */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Media query para tabletas y móviles */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 16px 30px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+}
+
+/* Hover de la barra de navegación: Usa Azul Medio y el nuevo Azul Eléctrico */
+.nav-links a:hover {
+    background: rgba(27, 123, 181, 0.3); /* Fondo azul claro semitransparente (#1b7bb5) */
+    color: #0144ae; /* Texto Azul Eléctrico (Nuevo color de contraste) */
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 650px) {
+    .navbar {
+        flex-direction: column;
+        gap: 14px;
+        padding: 20px;
+    }
+
+    .nav-links {
+        gap: 20px;
+    }
+}
+
 /* ---------------- SECCIONES ---------------- */
 section {
     scroll-margin-top: 95px;
