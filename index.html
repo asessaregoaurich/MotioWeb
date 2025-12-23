@@ -4,7 +4,6 @@
         <title>Motio</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@900&display=swap" rel="stylesheet">
-
         <link rel="icon" href="imagenes/logo.png" type="image/x-icon">
     </head>
     <body>
@@ -13,7 +12,6 @@
                 <img src="imagenes/logo.png" alt="Motio Logo">
             </a>
 
-            <!-- Agregué el botón hamburguesa que faltaba -->
             <button class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
@@ -23,15 +21,20 @@
             <nav class="nav-links" id="nav-links">
                 <a href="#productos">Productos</a>
                 <a href="#sobrenosotros">SobreNosotros</a>
-                <a href="https://oligrosso.github.io/motiometrics-backend/analisis_csv.html" title="Portal del Medico" target="_blank">
+                <!-- Cambio de link externo a login.html -->
+                <a href="login.html" title="Portal del Medico">
                      <img src="imagenes/portal.png" alt="Portal Médico" class="portal-icon">
                 </a>
             </nav>
         </header>
 
-        <section id="inicio">
-            <h1>MOTIO</h1>
-            <p>Hacemos la ciencia del movimiento accesible</p>
+        <section id="inicio" class="parallax-container">
+            <div class="parallax-bg" id="parallax-bg"></div>
+            <div class="parallax-overlay"></div>
+            <div class="parallax-content">
+                <h1>MOTIO</h1>
+                <p class="claim">Dispositivos portátiles para tratamiento y medición de síntomas del Parkinson.</p>
+            </div>
         </section>
 
         <section id="productos">
@@ -51,6 +54,43 @@
                     <h3>Motio-Metrics</h3>
                 </a>
 
+            </div>
+        </section>
+
+        <section id="validacion">
+            <h2>Validación con pacientes</h2>
+
+            <p class="section-intro">
+                Los dispositivos desarrollados fueron evaluados en pacientes reales con enfermedad de Parkinson
+                y en sujetos control, bajo supervisión clínica, con el objetivo de analizar su desempeño,
+                confiabilidad y capacidad de caracterización objetiva del temblor.
+            </p>
+
+            <div class="validacion-galeria">
+                <div class="validacion-card">
+                    <img src="imagenes/paciente-temblor.png" alt="Paciente con Parkinson temblorígeno">
+                    <p>
+                        <strong>Paciente con Parkinson temblorígeno</strong><br>
+                        Detección clara de episodios de temblor y caracterización de su frecuencia dominante.
+                    </p>
+                </div>
+
+
+                <div class="validacion-card">
+                    <img src="imagenes/disquinesias.png" alt="Paciente con disquinesias sin temblor">
+                    <p>
+                        <strong>Paciente con disquinesias</strong><br>
+                        Diferenciación entre movimientos involuntarios y temblor patológico.
+                    </p>
+                </div>
+
+                <div class="validacion-card">
+                    <img src="imagenes/control.png" alt="Paciente control">
+                    <p>
+                        <strong>Sujeto control</strong><br>
+                        Registros sin presencia de temblor, utilizados como referencia.
+                    </p>
+                </div>
             </div>
         </section>
 
@@ -76,6 +116,14 @@
             
         </section>
 
+        <section id="proposito">
+            <div class="circle-reveal-wrapper" id="circle-reveal">
+                <div class="circle-reveal-content">
+                    <h1> Hacemos la ciencia del movimiento accesible</h1>
+                </div>
+            </div>
+        </section>
+
         <footer class="main-footer">
             <div class="footer-content">
                 <div class="footer-section about">
@@ -89,7 +137,8 @@
                         <li><a href="#inicio">Inicio</a></li>
                         <li><a href="#productos">Productos</a></li>
                         <li><a href="#sobrenosotros">Sobre Nosotros</a></li>
-                        <li><a href="https://motio.example.com" target="_blank">Portal Médico</a></li>
+                        <!-- Cambio de link externo a login.html -->
+                        <li><a href="login.html">Portal Médico</a></li>
                     </ul>
                 </div>
 
@@ -106,18 +155,15 @@
             </div>
         </footer>
         
-        <!-- Agregué el script de JavaScript para hacer funcionar el hamburguesa -->
         <script>
             const hamburger = document.getElementById('hamburger');
             const navLinks = document.getElementById('nav-links');
 
-            // Abrir/cerrar menú al hacer click en el hamburguesa
             hamburger.addEventListener('click', function() {
                 hamburger.classList.toggle('active');
                 navLinks.classList.toggle('active');
             });
 
-            // Cerrar el menú al hacer click en un enlace
             const navItems = navLinks.querySelectorAll('a');
             navItems.forEach(item => {
                 item.addEventListener('click', function() {
@@ -126,7 +172,6 @@
                 });
             });
 
-            // Cerrar el menú al hacer click fuera del navbar
             document.addEventListener('click', function(event) {
                 const navbar = document.querySelector('.navbar');
                 if (!navbar.contains(event.target)) {
@@ -134,7 +179,72 @@
                     navLinks.classList.remove('active');
                 }
             });
+
+            const parallaxBg = document.getElementById('parallax-bg');
+            const parallaxContainer = document.querySelector('.parallax-container');
+            
+            function handleParallax() {
+                const scrolled = window.pageYOffset;
+                const containerHeight = parallaxContainer ? parallaxContainer.offsetHeight : window.innerHeight;
+                
+                if (parallaxBg && scrolled <= containerHeight * 1.5) {
+                    const angle = scrolled * 0.005;
+                    const radius = 50;
+                    
+                    const offsetX = Math.cos(angle) * radius;
+                    const offsetY = Math.sin(angle) * radius;
+                    
+                    const scale = 1.1 + Math.sin(angle * 0.5) * 0.05;
+                    
+                    parallaxBg.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+                }
+            }
+
+            handleParallax();
+            
+            let ticking = false;
+
+            const circleReveal = document.getElementById('circle-reveal');
+            const propositoSection = document.getElementById('proposito');
+
+            function handleCircleReveal() {
+                if (!circleReveal || !propositoSection) return;
+                
+                const rect = propositoSection.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                const sectionTop = rect.top;
+                const sectionBottom = rect.bottom;
+                
+                if (sectionTop > windowHeight) {
+                    circleReveal.style.clipPath = 'circle(0% at 50% 50%)';
+                    return;
+                }
+                
+                if (sectionTop <= 0) {
+                    circleReveal.style.clipPath = 'circle(150% at 50% 50%)';
+                    return;
+                }
+                
+                const progress = 1 - (sectionTop / windowHeight);
+                const clampedProgress = Math.max(0, Math.min(1, progress));
+                const circleSize = clampedProgress * 120;
+                
+                circleReveal.style.clipPath = `circle(${circleSize}% at 50% 50%)`;
+            }
+
+            handleCircleReveal();
+
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        handleParallax();
+                        handleCircleReveal();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
         </script>
     </body>
 </html>
-

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portal Médico - Motio</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link rel="icon" href="imagenes/logo.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="portal-page">
+    <header class="portal-header">
+        <h1>Portal Médico Motio</h1>
+        <button class="btn-logout" id="btn-logout">Cerrar Sesión</button>
+    </header>
+
+    <main class="portal-content">
+        <div class="portal-welcome">
+            <h2>Bienvenido al Portal</h2>
+            <p>Has iniciado sesión como: <span class="user-email" id="user-email">Cargando...</span></p>
+        </div>
+        
+        <!-- Aquí puedes agregar el contenido del portal médico -->
+        <div class="portal-welcome">
+            <h2>Motio-Metrics</h2>
+            <p>Accede a las herramientas de análisis y medición para tus pacientes.</p>
+            <br>
+            <a href="https://oligrosso.github.io/motiometrics-backend/index.html" target="_blank" class="btn-login" style="display: inline-block; text-decoration: none; max-width: 300px;">
+                Ir a Motio-Metrics
+            </a>
+        </div>
+    </main>
+
+    <script>
+        // Configuración de Supabase - Reemplaza con tus credenciales
+        const SUPABASE_URL = 'https://ucfiyouwdyznzvnqnixy.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjZml5b3V3ZHl6bnp2bnFuaXh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY0NDIxNzksImV4cCI6MjA4MjAxODE3OX0.5kW6Qf8XVNjyW4QpcVDwagxHERuf7oTBP-IYqJ2UfFo';
+        
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // Verificar autenticación
+        async function checkAuth() {
+            try {
+                const { data: { session }, error } = await supabase.auth.getSession();
+                
+                if (error) {
+                    console.error('Error al obtener sesión:', error.message);
+                    document.getElementById('user-email').textContent = 'Error de conexión';
+                    return;
+                }
+                
+                if (!session) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+                
+                document.getElementById('user-email').textContent = session.user.email;
+            } catch (err) {
+                console.error('Error inesperado:', err);
+                document.getElementById('user-email').textContent = 'Error';
+            }
+        }
+
+        // <CHANGE> Agregar manejo de errores en logout
+        document.getElementById('btn-logout').addEventListener('click', async () => {
+            try {
+                const { error } = await supabase.auth.signOut();
+                if (error) {
+                    console.error('Error al cerrar sesión:', error.message);
+                    alert('Error al cerrar sesión: ' + error.message);
+                    return;
+                }
+                window.location.href = 'index.html';
+            } catch (err) {
+                console.error('Error inesperado:', err);
+            }
+        });
+
+        // <CHANGE> Llamar a checkAuth cuando carga la página
+        checkAuth();
+    </script>
+</body>
+</html>
