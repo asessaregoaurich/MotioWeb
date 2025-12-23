@@ -1,0 +1,19 @@
+# Archivos de sistema (Mac)
+.DS_Store
+.AppleDouble
+.LSOverride
+**/._*
+
+# Archivos de sistema (Windows)
+Thumbs.db
+ehthumbs.db
+
+# Logs y temporales
+*.log
+npm-debug.log*
+
+# Configuración de editores (VS Code)
+.vscode/
+
+# Seguridad (por si luego usas variables de entorno)
+.env
